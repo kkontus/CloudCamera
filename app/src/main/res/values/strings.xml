@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Cloud Camera</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_dropbox">Dropbox</string>
+    <string name="action_google_plus">Google+</string>
+    <string name="action_one_drive">OneDrive</string>
+    <string name="action_box">Box</string>
+    <string name="action_facebook">Facebook</string>
+    <string name="action_preview">Preview</string>
 </resources>
