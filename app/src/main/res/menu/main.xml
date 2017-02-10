@@ -1,0 +1,36 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-sauto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.kkontus.cloudcamera.activities.MainActivity" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/action_settings"/>
+    <item
+        android:id="@+id/action_dropbox"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/action_dropbox"/>
+    <item
+        android:id="@+id/action_google_plus"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/action_google_plus"/>
+    <item
+        android:id="@+id/action_one_drive"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/action_one_drive"/>
+    <item
+        android:id="@+id/action_box"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/action_box"/>    
+     <item
+        android:id="@+id/action_facebook"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/action_facebook"/>
+</menu>

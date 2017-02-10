@@ -17,6 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.BoxActivity" />
+        <activity android:name=".activities.DropboxActivity" />
+        <activity android:name=".activities.FacebookActivity" />
+        <activity android:name=".activities.GooglePlusActivity" />
+        <activity android:name=".activities.ImageActivity" />
+        <activity android:name=".activities.OneDriveActivity" />
+        <activity android:name=".activities.SettingsActivity"></activity>
     </application>
 
 </manifest>
