@@ -12,4 +12,8 @@
     <string name="take_another_photo">Take another photo</string>
     <string name="upload_image_using">Select storage</string>
     <string name="cancel">Cancel</string>
+
+
+    <string name="facebook_app_id">792454000930184</string>
+    <string name="fb_login_protocol_scheme">fb792454000930184</string>
 </resources>
