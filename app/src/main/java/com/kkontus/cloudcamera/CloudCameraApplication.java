@@ -2,7 +2,6 @@ package com.kkontus.cloudcamera;
 
 import android.app.Application;
 
-import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
 /**
@@ -16,7 +15,6 @@ public class CloudCameraApplication extends Application {
         // TODO Auto-generated method stub
         super.onCreate();
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
     }
 
