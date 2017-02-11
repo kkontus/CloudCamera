@@ -2,7 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kkontus.cloudcamera">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +32,36 @@
         <activity android:name=".activities.GooglePlusActivity" />
         <activity android:name=".activities.ImageActivity" />
         <activity android:name=".activities.OneDriveActivity" />
-        <activity android:name=".activities.SettingsActivity"></activity>
+        <activity android:name=".activities.SettingsActivity" />
+
+        <receiver
+            android:name="com.kkontus.cloudcamera.receivers.CameraReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <!-- this is due duplicate onReceive call on Samsung S4 Mini, on other tested devices works ok with both -->
+                <!-- check with commented on htc and there is also possibiliy that this won't work on some Samsung devices without both -->
+                <!-- <action android:name="com.android.camera.NEW_PICTURE" /> -->
+                <action android:name="android.hardware.action.NEW_PICTURE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.kkontus.cloudcamera.receivers.NetworkTypeChangeReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <!-- <action android:name="NetworkTypeChange" /> -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

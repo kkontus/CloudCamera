@@ -11,6 +11,7 @@ import com.kkontus.cloudcamera.repository.DatabaseManager;
 import com.kkontus.cloudcamera.repository.ImageUploadStatus;
 
 import org.apache.commons.collections4.MultiMap;
+import org.apache.commons.collections4.MultiValuedMap;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -20,7 +21,7 @@ public class ServiceHelper {
 
     public static final String TAG = "ServiceHelper";
 
-    public void serviceIteratorStart(Context context, MultiMap<String, String> albumsPerService) {
+    public void serviceIteratorStart(Context context, MultiValuedMap<String, String> albumsPerService) {
         Log.i(TAG, "serviceIteratorStart");
 
         Set<String> keySet = albumsPerService.keySet();
@@ -49,7 +50,7 @@ public class ServiceHelper {
         }
     }
 
-    public void serviceIteratorStop(Context context, MultiMap<String, String> albumsPerService) {
+    public void serviceIteratorStop(Context context, MultiValuedMap<String, String> albumsPerService) {
         Log.i(TAG, "serviceIteratorStop");
 
         Set<String> keySet = albumsPerService.keySet();
@@ -112,12 +113,12 @@ public class ServiceHelper {
         }
     }
 
-    public MultiMap<String, String> loadServiceAlbumsCombinationsFromDatabase(Context context) {
+    public MultiValuedMap<String, String> loadServiceAlbumsCombinationsFromDatabase(Context context) {
         ImageUploadStatus imageUploadStatus = new ImageUploadStatus(context);
         DatabaseManager.initializeInstance(imageUploadStatus);
         SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
 
-        MultiMap<String, String> albumNamesFromDb = imageUploadStatus.getServiceAlbumsCombinations(database);
+        MultiValuedMap<String, String> albumNamesFromDb = imageUploadStatus.getServiceAlbumsCombinations(database);
         DatabaseManager.getInstance().closeDatabase();
 
         return albumNamesFromDb;

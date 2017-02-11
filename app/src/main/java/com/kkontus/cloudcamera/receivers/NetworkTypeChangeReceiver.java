@@ -15,6 +15,7 @@ import com.kkontus.cloudcamera.helpers.SharedPreferencesHelper;
 import com.kkontus.cloudcamera.interfaces.OnNetworkTypeChange;
 
 import org.apache.commons.collections4.MultiMap;
+import org.apache.commons.collections4.MultiValuedMap;
 
 public class NetworkTypeChangeReceiver extends BroadcastReceiver {
 
@@ -28,7 +29,7 @@ public class NetworkTypeChangeReceiver extends BroadcastReceiver {
         Toast.makeText(context, "Intent Received - Network State Changed", Toast.LENGTH_SHORT).show();
 
         ServiceHelper serviceHelper = new ServiceHelper();
-        MultiMap<String, String> albumsPerService = serviceHelper.loadServiceAlbumsCombinationsFromDatabase(context);
+        MultiValuedMap<String, String> albumsPerService = serviceHelper.loadServiceAlbumsCombinationsFromDatabase(context);
 
         ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);

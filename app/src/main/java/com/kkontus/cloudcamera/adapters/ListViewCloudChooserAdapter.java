@@ -36,10 +36,8 @@ public class ListViewCloudChooserAdapter extends ArrayAdapter<String> {
 
             viewHolder = new ViewHolder();
 
-			/*
-            viewHolder.imageName = (TextView) convertView.findViewById(R.id.textviewCloud);
+			viewHolder.imageName = (TextView) convertView.findViewById(R.id.textviewCloud);
 			viewHolder.image = (ImageView) convertView.findViewById(R.id.imageviewCloud);
-			*/
 
             convertView.setTag(viewHolder);
         } else {

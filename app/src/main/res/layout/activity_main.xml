@@ -10,8 +10,49 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.kkontus.cloudcamera.activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edittextAlbumName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:hint="@string/album_name"
+        android:imeOptions="actionDone"
+        android:maxLines="1" />
+
+    <LinearLayout
+        android:id="@+id/llAlbumButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edittextAlbumName"
+        android:orientation="horizontal"
+        android:paddingTop="15dp"
+        android:weightSum="1" >
+
+        <Button
+            android:id="@+id/buttonUploadAlbum"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="start"
+            android:text="@string/upload_album"
+            android:textColor="@color/blue" />
+
+        <Button
+            android:id="@+id/buttonTakeMorePhoto"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="end"
+            android:text="@string/take_another_photo"
+            android:textColor="@color/blue" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listviewImagesTaken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llAlbumButtons" >
+    </ListView>
+
 </RelativeLayout>

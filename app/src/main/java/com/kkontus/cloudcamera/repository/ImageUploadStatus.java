@@ -12,7 +12,9 @@ import com.kkontus.cloudcamera.domain.ImageAlbumItem;
 import com.kkontus.cloudcamera.helpers.AppConnectionSettings;
 
 import org.apache.commons.collections4.MultiMap;
+import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.map.MultiValueMap;
+import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 
 import java.util.ArrayList;
 
@@ -119,14 +121,15 @@ public class ImageUploadStatus extends SQLiteOpenHelper {
         return imageAlbumItems;
     }
 
-    public MultiMap<String, String> getServiceAlbumsCombinations(SQLiteDatabase database) {
+    public MultiValuedMap<String, String> getServiceAlbumsCombinations(SQLiteDatabase database) {
 
         //SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
 
         String countQuery = "SELECT DISTINCT " + KEY_SERVICE_NAME + ", " + KEY_ALBUM_NAME + " FROM " + TABLE_IMAGE_UPLOAD_STATUS;
         Cursor cursor = database.rawQuery(countQuery, null);
 
-        MultiMap<String, String> multiMap = new MultiValueMap<String, String>();
+        MultiValuedMap<String, String> multiMap = new HashSetValuedHashMap<String, String>();
+        //MultiMap<String, String> multiMap = new MultiValueMap<String, String>();
         while (cursor.moveToNext()) {
             String serviceName = cursor.getString(cursor.getColumnIndex(KEY_SERVICE_NAME));
             String albumName = cursor.getString(cursor.getColumnIndex(KEY_ALBUM_NAME));

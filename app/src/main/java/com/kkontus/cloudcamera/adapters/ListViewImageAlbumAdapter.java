@@ -11,6 +11,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kkontus.cloudcamera.R;
 import com.kkontus.cloudcamera.domain.ImageAlbumItem;
 
 import java.util.List;
@@ -40,11 +41,9 @@ public class ListViewImageAlbumAdapter extends ArrayAdapter<ImageAlbumItem> {
 
             viewHolder = new ViewHolder();
 
-			/*
-            viewHolder.imageName = (TextView) convertView.findViewById(R.id.textviewImageName);
+			viewHolder.imageName = (TextView) convertView.findViewById(R.id.textviewImageName);
 			viewHolder.image = (ImageView) convertView.findViewById(R.id.imageviewImageTaken);
 			viewHolder.imageToUpload = (CheckBox) convertView.findViewById(R.id.checkboxItemToUpload);
-			*/
 
             convertView.setTag(viewHolder);
         } else {

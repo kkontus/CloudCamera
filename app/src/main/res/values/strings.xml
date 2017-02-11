@@ -7,4 +7,9 @@
     <string name="action_box">Box</string>
     <string name="action_facebook">Facebook</string>
     <string name="action_preview">Preview</string>
+    <string name="album_name">Album name</string>
+    <string name="upload_album">Upload album</string>
+    <string name="take_another_photo">Take another photo</string>
+    <string name="upload_image_using">Select storage</string>
+    <string name="cancel">Cancel</string>
 </resources>
