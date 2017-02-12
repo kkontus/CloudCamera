@@ -72,19 +72,13 @@ public class FacebookActivity extends AppCompatActivity {
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setTypeface(tf);
         loginButton.setTextSize(14);
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
-
+        loginButton.setReadPermissions("email, user_photos");
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
-
                 System.out.println(TAG + " onSuccess(LoginResult loginResult)");
-                System.out.println(loginResult.getAccessToken().toString());
-                System.out.println(loginResult.getAccessToken().getToken());
-                System.out.println(loginResult.getAccessToken().getUserId());
 
                 resultTextView.setText(loginResult.getAccessToken().getToken());
                 getProfileData(loginResult);
@@ -109,7 +103,7 @@ public class FacebookActivity extends AppCompatActivity {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
                 // TODO Auto-generated method stub
-                System.out.println("FB onCurrentAccessTokenChanged");
+                System.out.println(TAG + " onCurrentAccessTokenChanged");
 
                 if (currentAccessToken != null) {
                     showLoggedInScreen();
@@ -123,14 +117,7 @@ public class FacebookActivity extends AppCompatActivity {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                 // TODO Auto-generated method stub
-                System.out.println("FB onCurrentProfileChanged");
-//				System.out.println("FB currentProfile.getFirstName()" + currentProfile.getFirstName());
-//				System.out.println("FB currentProfile.getLastName()" + currentProfile.getLastName());
-//				System.out.println("FB currentProfile.getName()" + currentProfile.getName());
-//				System.out.println("FB currentProfile.getLinkUri()" + currentProfile.getLinkUri());
-//				System.out.println("FB currentProfile.getId()" + currentProfile.getId());
-//				System.out.println("FB currentProfile.getProfilePictureUri()" + currentProfile.getProfilePictureUri(100, 100));
-
+                System.out.println(TAG + " onCurrentProfileChanged");
             }
         };
 
@@ -156,7 +143,7 @@ public class FacebookActivity extends AppCompatActivity {
 
     private void showLoggedOutScreen() {
         llProfileLayoutFacebook.setVisibility(View.GONE);
-        resultTextView.setText("Logged out");
+        resultTextView.setText(getString(R.string.logged_out));
         txtNameFacebook.setText("");
         txtEmailFacebook.setText("");
         imgProfilePicFacebook.setImageBitmap(null);

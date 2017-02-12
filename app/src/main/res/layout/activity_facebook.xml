@@ -66,13 +66,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp"
-        facebook:com_facebook_login_text="Sign in"
-        facebook:com_facebook_logout_text="Sign out" />
+        facebook:com_facebook_login_text="@string/sign_in"
+        facebook:com_facebook_logout_text="@string/sign_out" />
 
     <TextView
         android:id="@+id/resultTextViewFacebook"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Info status." />
+        android:text="@string/info_status" />
 
 </LinearLayout>

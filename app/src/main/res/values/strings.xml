@@ -12,6 +12,10 @@
     <string name="take_another_photo">Take another photo</string>
     <string name="upload_image_using">Select storage</string>
     <string name="cancel">Cancel</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_out">Sign out</string>
+    <string name="info_status">Info status.</string>
+    <string name="logged_out">Logged out</string>
 
 
     <string name="facebook_app_id">792454000930184</string>

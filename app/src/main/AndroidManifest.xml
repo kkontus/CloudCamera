@@ -51,6 +51,13 @@
             </intent-filter>
         </activity>
 
+        <service android:enabled="true" android:name="com.kkontus.cloudcamera.services.DropboxSenderService"></service>
+        <service android:enabled="true" android:name="com.kkontus.cloudcamera.services.GoogleDriveSenderService"></service>
+        <service android:enabled="true" android:name="com.kkontus.cloudcamera.services.OneDriveSenderService"></service>
+        <service android:enabled="true" android:name="com.kkontus.cloudcamera.services.BoxSenderService"></service>
+        <service android:enabled="true" android:name="com.kkontus.cloudcamera.services.FacebookSenderService"></service>
+        <service android:enabled="true" android:name="com.kkontus.cloudcamera.services.LocalFolderSenderService"></service>
+
         <receiver
             android:name="com.kkontus.cloudcamera.receivers.CameraReceiver"
             android:enabled="true"
