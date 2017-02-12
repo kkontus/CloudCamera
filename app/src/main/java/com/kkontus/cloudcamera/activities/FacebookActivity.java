@@ -46,7 +46,7 @@ public class FacebookActivity extends AppCompatActivity {
     private ImageView imgProfilePicFacebook;
     private TextView txtNameFacebook, txtEmailFacebook;
     private LinearLayout llProfileLayoutFacebook;
-    private ProgressDialog progressDialog;
+    //private ProgressDialog progressDialog;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private GraphRequest graphRequestProfile;
@@ -64,19 +64,7 @@ public class FacebookActivity extends AppCompatActivity {
         txtEmailFacebook = (TextView) findViewById(R.id.txtEmailFacebook);
         llProfileLayoutFacebook = (LinearLayout) findViewById(R.id.llProfileFacebook);
 
-        if (AccessToken.getCurrentAccessToken() != null) {
-            SharedPreferences prefs = getSharedPreferences(AppSettings.FACEBOOK_PREFS_NAME, Context.MODE_PRIVATE);
-            String rawResponse = prefs.getString(AppSettings.FACEBOOK_PROFILE_DATA, null);
-            parseProfileData(rawResponse);
-
-            llProfileLayoutFacebook.setVisibility(View.VISIBLE);
-        } else {
-            llProfileLayoutFacebook.setVisibility(View.GONE);
-            resultTextView.setText("Logged out");
-            txtNameFacebook.setText("");
-            txtEmailFacebook.setText("");
-            imgProfilePicFacebook.setImageBitmap(null);
-        }
+        handleViewVisibility();
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -124,15 +112,10 @@ public class FacebookActivity extends AppCompatActivity {
                 System.out.println("FB onCurrentAccessTokenChanged");
 
                 if (currentAccessToken != null) {
-                    llProfileLayoutFacebook.setVisibility(View.VISIBLE);
+                    showLoggedInScreen();
                 } else {
-                    llProfileLayoutFacebook.setVisibility(View.GONE);
-                    resultTextView.setText("Logged out");
-                    txtNameFacebook.setText("");
-                    txtEmailFacebook.setText("");
-                    imgProfilePicFacebook.setImageBitmap(null);
+                    showLoggedOutScreen();
                 }
-
             }
         };
 
@@ -151,8 +134,32 @@ public class FacebookActivity extends AppCompatActivity {
             }
         };
 
-        accessTokenTracker.stopTracking();
-        profileTracker.stopTracking();
+        accessTokenTracker.startTracking();
+        profileTracker.startTracking();
+    }
+
+    private void handleViewVisibility() {
+        if (AccessToken.getCurrentAccessToken() != null) {
+            SharedPreferences prefs = getSharedPreferences(AppSettings.FACEBOOK_PREFS_NAME, Context.MODE_PRIVATE);
+            String rawResponse = prefs.getString(AppSettings.FACEBOOK_PROFILE_DATA, null);
+            parseProfileData(rawResponse);
+
+            showLoggedInScreen();
+        } else {
+            showLoggedOutScreen();
+        }
+    }
+
+    private void showLoggedInScreen() {
+        llProfileLayoutFacebook.setVisibility(View.VISIBLE);
+    }
+
+    private void showLoggedOutScreen() {
+        llProfileLayoutFacebook.setVisibility(View.GONE);
+        resultTextView.setText("Logged out");
+        txtNameFacebook.setText("");
+        txtEmailFacebook.setText("");
+        imgProfilePicFacebook.setImageBitmap(null);
     }
 
     @Override
@@ -221,9 +228,9 @@ public class FacebookActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(FacebookActivity.this);
-            progressDialog.setMessage("Loading Image ....");
-            progressDialog.show();
+            //progressDialog = new ProgressDialog(FacebookActivity.this);
+            //progressDialog.setMessage("Loading Image ....");
+            //progressDialog.show();
         }
 
         protected Bitmap doInBackground(String... args) {
@@ -239,9 +246,9 @@ public class FacebookActivity extends AppCompatActivity {
         protected void onPostExecute(Bitmap image) {
             if (image != null) {
                 imgProfilePicFacebook.setImageBitmap(image);
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
             } else {
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
                 Toast.makeText(FacebookActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
             }
         }
