@@ -18,6 +18,7 @@
     <string name="logged_out">Logged out</string>
 
 
+    <string name="app_key">blg0uayupds8oi2</string>
     <string name="facebook_app_id">792454000930184</string>
     <string name="fb_login_protocol_scheme">fb792454000930184</string>
 </resources>

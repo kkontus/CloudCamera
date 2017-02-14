@@ -9,11 +9,13 @@ public class AppSettings {
     public static final String FORESLASH = "/";
 
     public static final String PREFS_NAME = "SmartCameraPrefs";
+    public static final String BOX_PREFS_NAME = "BoxPrefs";
     public static final String DROPBOX_PREFS_NAME = "DropboxPrefs";
     public static final String GOOGLE_PREFS_NAME = "GooglePrefs";
     public static final String ONE_DRIVE_PREFS_NAME = "OneDrivePrefs";
     public static final String FACEBOOK_PREFS_NAME = "Facebook";
 
+    public static final String DROPBOX_ACCESS_TOKEN = "dropboxAccessToken";
     public static final String FACEBOOK_PROFILE_DATA = "facebookProfileData";
 
     public static final String DROPBOX_MAIN_FOLDER = "/Photos/";
