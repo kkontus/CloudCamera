@@ -12,6 +12,7 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxHost;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.android.Auth;
+import com.dropbox.core.android.AuthActivity;
 import com.dropbox.core.http.HttpRequestor;
 import com.dropbox.core.v2.DbxRawClientV2;
 import com.dropbox.core.v2.auth.DbxUserAuthRequests;
@@ -77,6 +78,9 @@ public class DropboxActivity extends AppCompatActivity {
                                 requests.tokenRevoke();
                                 showLoggedInScreen();
                                 System.out.println(TAG + " DbxUserAuthRequests token revoked");
+                                DropboxClientFactory.clearClient();
+                                AuthActivity.result = null;
+                                clearKeys();
                             } catch (DbxException e) {
                                 System.out.println(TAG + " DbxUserAuthRequests token revoke error");
                                 e.printStackTrace();
@@ -84,7 +88,6 @@ public class DropboxActivity extends AppCompatActivity {
                         }
                     });
                     thread.start();
-                    clearKeys();
                 } else {
                     Auth.startOAuth2Authentication(DropboxActivity.this, getString(R.string.app_key));
                     showLoggedOutScreen();
