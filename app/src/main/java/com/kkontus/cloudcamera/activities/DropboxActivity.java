@@ -8,12 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.dropbox.core.DbxException;
+import com.dropbox.core.DbxHost;
+import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.android.Auth;
+import com.dropbox.core.http.HttpRequestor;
+import com.dropbox.core.v2.DbxRawClientV2;
+import com.dropbox.core.v2.auth.DbxUserAuthRequests;
 import com.dropbox.core.v2.users.FullAccount;
 import com.kkontus.cloudcamera.APIutils.DropboxClientFactory;
 import com.kkontus.cloudcamera.APIutils.GetCurrentAccountTask;
 import com.kkontus.cloudcamera.R;
 import com.kkontus.cloudcamera.helpers.AppSettings;
+
+import java.util.List;
 
 public class DropboxActivity extends AppCompatActivity {
     public static final String TAG = "DropboxActivity";
@@ -44,8 +52,39 @@ public class DropboxActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (hasToken()) {
+                    SharedPreferences prefs = getSharedPreferences(AppSettings.DROPBOX_PREFS_NAME, MODE_PRIVATE);
+                    final String accessToken = prefs.getString(AppSettings.DROPBOX_ACCESS_TOKEN, null);
+
+                    DbxRequestConfig requestConfig = DbxRequestConfig.newBuilder("Cloud Camera/1.0").build();
+                    DbxHost host = DbxHost.DEFAULT;
+                    final DbxRawClientV2 dbxRawClientV2 = new DbxRawClientV2(requestConfig, host) {
+                        @Override
+                        protected void addAuthHeaders(List<HttpRequestor.Header> headers) {
+                            HttpRequestor.Header header = new HttpRequestor.Header("Authorization", "Bearer" + " " + accessToken);
+
+                            headers.add(header);
+
+                            for (HttpRequestor.Header h : headers) {
+                                System.out.println(h.getKey() + " " + h.getValue());
+                            }
+                        }
+                    };
+                    final Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DbxUserAuthRequests requests = new DbxUserAuthRequests(dbxRawClientV2);
+                            try {
+                                requests.tokenRevoke();
+                                showLoggedInScreen();
+                                System.out.println(TAG + " DbxUserAuthRequests token revoked");
+                            } catch (DbxException e) {
+                                System.out.println(TAG + " DbxUserAuthRequests token revoke error");
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    thread.start();
                     clearKeys();
-                    showLoggedInScreen();
                 } else {
                     Auth.startOAuth2Authentication(DropboxActivity.this, getString(R.string.app_key));
                     showLoggedOutScreen();
